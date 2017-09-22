@@ -67,7 +67,7 @@ void wait(long interval) {
 
 void light(int led) { 
   switch (led) {
- 	case 1:
+ 	  case 1:
     	digitalWrite(2, HIGH);
     	break;
     case 2:
