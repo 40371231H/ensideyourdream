@@ -22,25 +22,25 @@ void setup() {
 
 void loop() {
   switch(incomingByte) {
-       case '6':
+   		case '6':
             analogWrite(redled, 255);
             analogWrite(greenled, 0);
             analogWrite(blueled, 0);
-          break;
-        case '7':
-          analogWrite(redled, 0);
+      		break;
+      	case '7':
+      		analogWrite(redled, 0);
             analogWrite(greenled, 255);
             analogWrite(blueled, 0);
-          break;
-        case '8':
-          analogWrite(redled, 0);
+      		break;
+      	case '8':
+      		analogWrite(redled, 0);
             analogWrite(greenled, 0);
             analogWrite(blueled, 255);
-          break;
-        case '9':
-        break;
+      		break;
+      	case '9':
+    		break;
         default:
-        break;
+    		break;
     }
 }
 

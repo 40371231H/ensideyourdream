@@ -25,9 +25,13 @@ void setup() {
   Serial.println("Received data:");
   
   //定義腳位輸出
-  for(int i = 2;i <= 9;i++) {
-     pinMode(i, OUTPUT); 
+  for(int i = 2;i <= 13;i++) {
+   	pinMode(i, OUTPUT); 
   }
+  pinMode(A0, OUTPUT);
+  pinMode(A1, OUTPUT);
+  pinMode(A2, OUTPUT);
+  pinMode(A3, OUTPUT);
   ledRun();
   light(pos);
 }
@@ -35,25 +39,25 @@ void setup() {
 void loop() {
   switch(incomingByte) {
     case '0':
-      dice(1);
-      break;
+    	dice(1);
+    	break;
     case '1':
-      dice(2);
-      break;
+	    dice(2);
+    	break;
     case '2':
-      dice(3);
-      break;
+    	dice(3);
+    	break;
     case '3':
-      dice(4);
-      break;
+    	dice(4);
+    	break;
     case '4':
-      dice(5);
-      break;
+    	dice(5);
+    	break;
     case '5':
-    dice(6);
-      break;
+		dice(6);
+    	break;
     default:
-      break;
+    	break;
   }
 }
 
@@ -63,76 +67,124 @@ void wait(long interval) {
 
 void light(int led) { 
   switch (led) {
-  case 1:
-      digitalWrite(2, HIGH);
-      break;
+ 	case 1:
+    	digitalWrite(2, HIGH);
+    	break;
     case 2:
-      digitalWrite(3, HIGH);
-      break;
+    	digitalWrite(3, HIGH);
+    	break;
     case 3:
-      digitalWrite(4, HIGH);
-      break;
+    	digitalWrite(4, HIGH);
+    	break;
     case 4:
-      digitalWrite(5, HIGH);
-      break;
+    	digitalWrite(5, HIGH);
+    	break;
     case 5:
-      digitalWrite(6, HIGH);
-      break;
+    	digitalWrite(6, HIGH);
+    	break;
     case 6:
-      digitalWrite(7, HIGH);
-      break;
+    	digitalWrite(7, HIGH);
+    	break;
     case 7:
-      digitalWrite(8, HIGH);
-      break;
+    	digitalWrite(8, HIGH);
+    	break;
     case 8:
-      digitalWrite(9, HIGH);
-      break;
+	    digitalWrite(9, HIGH);
+    	break;
+    case 9:
+    	digitalWrite(10, HIGH);
+    	break;
+    case 10:
+    	digitalWrite(11, HIGH);
+    	break;
+    case 11:
+    	digitalWrite(12, HIGH);
+    	break;
+    case 12:
+    	digitalWrite(13, HIGH);
+    	break;
+    case 13:
+    	analogWrite(A0, 255);
+    	break;
+    case 14:
+    	analogWrite(A1, 255);
+    	break;
+    case 15:
+    	analogWrite(A2, 255);
+    	break;
+    case 16:
+    	analogWrite(A3, 255);
+    	break;
   }
 }
 
 void lightAll() {
-  for(int i = 1;i <= 8;i++) {
+  for(int i = 1;i <= 16;i++) {
     light(i);
   }
 }
 
 void dark(int led){ 
   switch (led) {
-  case 1:
-      digitalWrite(2, LOW);
-      break;
+ 	case 1:
+    	digitalWrite(2, LOW);
+    	break;
     case 2:
-      digitalWrite(3, LOW);
-      break;
+    	digitalWrite(3, LOW);
+    	break;
     case 3:
-      digitalWrite(4, LOW);
-      break;
+    	digitalWrite(4, LOW);
+    	break;
     case 4:
-      digitalWrite(5, LOW);
-      break;
+    	digitalWrite(5, LOW);
+    	break;
     case 5:
-      digitalWrite(6, LOW);
-      break;
+    	digitalWrite(6, LOW);
+    	break;
     case 6:
-      digitalWrite(7, LOW);
-      break;
+    	digitalWrite(7, LOW);
+    	break;
     case 7:
-      digitalWrite(8, LOW);
-      break;
+    	digitalWrite(8, LOW);
+    	break;
     case 8:
-      digitalWrite(9, LOW);
-      break;
+	    digitalWrite(9, LOW);
+    	break;
+    case 9:
+    	digitalWrite(10, LOW);
+    	break;
+    case 10:
+    	digitalWrite(11, LOW);
+    	break;
+    case 11:
+    	digitalWrite(12, LOW);
+    	break;
+    case 12:
+    	digitalWrite(13, LOW);
+    	break;
+    case 13:
+    	analogWrite(A0, 0);
+    	break;
+    case 14:
+    	analogWrite(A1, 0);
+    	break;
+    case 15:
+    	analogWrite(A2, 0);
+    	break;
+    case 16:
+    	analogWrite(A3, 0);
+    	break;
   }
 }
 
 void darkAll() {
-  for(int i = 1;i <= 8;i++) {
+  for(int i = 1;i <= 16;i++) {
     dark(i);
   }
 }
 
 void ledRun() {
-  for(int i = 1;i <= 8;i++) {
+  for(int i = 1;i <= 16;i++) {
     light(i);
     delay(100);
     dark(i);
