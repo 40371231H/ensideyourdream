@@ -9,6 +9,8 @@
 const int SLAVE_ADDRESS = 1;
 char incomingByte = 0;
 
+void rgbLED(int, int, int);
+
 void setup() {  
   Wire.begin();         // join I2C bus as a Master
   
@@ -18,30 +20,31 @@ void setup() {
   pinMode(redled, OUTPUT);
   pinMode(greenled, OUTPUT);
   pinMode(blueled, OUTPUT);
+  rgbLED(255, 255, 255);
 }
 
 void loop() {
   switch(incomingByte) {
-   		case '6':
-            analogWrite(redled, 255);
-            analogWrite(greenled, 0);
-            analogWrite(blueled, 0);
-      		break;
-      	case '7':
-      		analogWrite(redled, 0);
-            analogWrite(greenled, 255);
-            analogWrite(blueled, 0);
-      		break;
-      	case '8':
-      		analogWrite(redled, 0);
-            analogWrite(greenled, 0);
-            analogWrite(blueled, 255);
-      		break;
-      	case '9':
-    		break;
+       case '6':
+            rgbLED(255, 0, 0);
+          break;
+        case '7':
+          rgbLED(0, 255, 0);
+          break;
+        case '8':
+          rgbLED(0, 0, 255);
+          break;
+        case '9':
+        break;
         default:
-    		break;
+        break;
     }
+}
+
+void rgbLED(int Rnum, int Gnum, int Bnum){
+  analogWrite(redled, Rnum);
+  analogWrite(greenled, Gnum);
+  analogWrite(blueled, Bnum);
 }
 
 void serialEvent() {
