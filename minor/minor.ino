@@ -2,7 +2,7 @@
 // Refer to the "master_sender" example for use with this
 #include <Wire.h>
 
-const int SLAVE_ADDRESS = 1;
+//const int SLAVE_ADDRESS = 1;
 char incomingByte = 0;
 
 void wait(long);
@@ -18,7 +18,7 @@ int pos = 1;
 
 void setup() {
   //I2C定義接收
-  Wire.begin(SLAVE_ADDRESS);    // join I2C bus as a slave with address 1
+  Wire.begin(1);    // join I2C bus as a slave with address 1
   Wire.onReceive(receiveEvent); // register event
   
   Serial.begin(9600);
@@ -33,32 +33,44 @@ void setup() {
   pinMode(A2, OUTPUT);
   pinMode(A3, OUTPUT);
   //ledRun();
-  light(pos);
-  //lightAll();
+  lightAll();
 }
 
 void loop() {
   if (Wire.available()) {
     // receive one byte from Master
     incomingByte = Wire.read();
-    Serial.print(incomingByte);
+    Serial.print("I receive ");
+    Serial.println(incomingByte);
     switch(incomingByte) {
-    case '0':
+    case '1':
+        Serial.print("Your dice is ");
+        Serial.println(incomingByte);
       dice(1);
       break;
-    case '1':
+    case '2':
+        Serial.print("Your dice is ");
+        Serial.println(incomingByte);
       dice(2);
       break;
-    case '2':
+    case '3':
+        Serial.print("Your dice is ");
+        Serial.println(incomingByte);
       dice(3);
       break;
-    case '3':
+    case '4':
+        Serial.print("Your dice is ");
+        Serial.println(incomingByte);
       dice(4);
       break;
-    case '4':
+    case '5':
+        Serial.print("Your dice is ");
+        Serial.println(incomingByte);
       dice(5);
       break;
-    case '5':
+    case '6':
+        Serial.print("Your dice is ");
+        Serial.println(incomingByte);
     dice(6);
       break;
     default:
@@ -208,7 +220,8 @@ void dice(int num) {
   if (pos >16)
     pos = pos - 16;
   light(pos);
-  Serial.print(pos);
+  Serial.print("Now my pos is ");
+  Serial.println(pos);
 }
 
 void receiveEvent(int howMany) {
