@@ -1,14 +1,13 @@
 // master_sender.ino
 // Refer to the "slave_receiver" example for use with this
 #include <Wire.h>
-// #include <SoftwareSerial.h>
+#include <SoftwareSerial.h>
 
 #define redled A0
 #define greenled A1
 #define blueled A2
 
-// const int TX = 4;
-// const int RX = 5;
+SoftwareSerial BT(11, 10);
 
 const int SLAVE_ADDRESS = 1;
 char incomingByte = 0;
@@ -19,8 +18,8 @@ void rgbLED(int, int, int);
 void setup()
 {
   Wire.begin(); // join I2C bus as a Master
-  Serial.begin(9600);
-  //  BT.begin(9600);
+  // Serial.begin(9600);
+  BT.begin(9600);
   Serial.println("Type something to send:");
 
   pinMode(redled, OUTPUT);
@@ -32,12 +31,15 @@ void setup()
 void loop()
 {
 
-  // if (BT.available())
-  // {
-  //   val = BT.read();
-  //   Serial.println(val);
+  if (BT.available())
+  {
+    val = BT.read();
+    // Serial.println(val);
+    Wire.beginTransmission(SLAVE_ADDRESS);
+    Wire.write(val);
+    Wire.endTransmission();
 
-    switch (incomingByte)
+    switch (val)
     {
     case '7':
       //Serial.println("I get 7, my led color is red");
@@ -48,7 +50,6 @@ void loop()
       rgbLED(0, 255, 0);
       break;
     case '9':
-    
       //Serial.println("I get 9, my led color is green");
       rgbLED(0, 0, 255);
       break;
@@ -59,7 +60,7 @@ void loop()
     default:
       break;
     }
-  // }
+  }
 }
 
 void rgbLED(int Rnum, int Gnum, int Bnum)
@@ -71,11 +72,11 @@ void rgbLED(int Rnum, int Gnum, int Bnum)
 
 void serialEvent()
 {
-  // read one byte from serial port
-  incomingByte = Serial.read();
+  // // read one byte from serial port
+  // incomingByte = BT.read();
 
-  // send the received data to slave
-  Wire.beginTransmission(SLAVE_ADDRESS);
-  Wire.write(incomingByte);
-  Wire.endTransmission();
+  // // send the received data to slave
+  // Wire.beginTransmission(SLAVE_ADDRESS);
+  // Wire.write(val);
+  // Wire.endTransmission();
 }
