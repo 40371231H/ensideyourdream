@@ -10,9 +10,10 @@ void light(int);
 void lightAll();
 void dark(int);
 void darkAll();
-void ledRun();
+void ledRun(int);
 void blinkLED(int, int);
 void dice(int);
+void startMotion();
 
 int pos = 1;
 
@@ -32,8 +33,8 @@ void setup() {
   pinMode(A1, OUTPUT);
   pinMode(A2, OUTPUT);
   pinMode(A3, OUTPUT);
-  //ledRun();
-  lightAll();
+  startMotion();
+  //lightAll();
   //light(pos);
 }
 
@@ -203,12 +204,12 @@ void darkAll() {
   }
 }
 
-void ledRun() {
+void ledRun(int wait) {
   for(int i = 1;i <= 16;i++) {
     light(i);
-    delay(100);
+    delay(wait);
     dark(i);
-    delay(100);
+    delay(wait);
   }
 }
 
@@ -223,6 +224,19 @@ void dice(int num) {
   light(pos);
   Serial.print("Now my pos is ");
   Serial.println(pos);
+}
+
+void startMotion() {
+  ledRun(500);
+  light(1);
+  delay(200);
+  dark(1);
+  delay(100);
+  light(1);
+  delay(100);
+  dark(1);
+  delay(100);
+  light(1);
 }
 
 void receiveEvent(int howMany) {
