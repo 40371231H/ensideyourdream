@@ -34,6 +34,7 @@ void setup() {
   pinMode(A3, OUTPUT);
   //ledRun();
   lightAll();
+  //light(pos);
 }
 
 void loop() {
